@@ -1,0 +1,10 @@
+<launch>
+	<arg name="ns" default="rb1" />
+	
+	<group ns="$(arg ns)">
+		<arg name="rb_id" value="0" />
+		<param name="rigidbody_id" type="int" value="$(arg rb_id)" />
+		<node name="mocap2mavros_rb_$(arg rb_id)" pkg="optitrack" type="mocap_pose.py" output="screen">
+		</node>
+	</group>
+</launch>

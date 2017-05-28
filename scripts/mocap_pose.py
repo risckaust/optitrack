@@ -20,7 +20,7 @@ class RigidBodies:
 		# define mocap message to subsribe to
 		self.mocap_msg				= RigidBodyArray()
 	
-		self.rbId				= 0
+		self.rbId				= rospy.get_param('rigidbody_id',0)
 		
 		# check if tracking is valid
 		self.tracking_valid			= False
@@ -55,9 +55,10 @@ def main():
 	rospy.Subscriber('/optitrack/rigid_bodies', RigidBodyArray, rBody.cb)
 
 	# publisher for the mavros fake gps topic
-	mavros_pub = rospy.Publisher('/mavros/mocap/pose', PoseStamped, queue_size=1)
+	mavros_pub = rospy.Publisher('mavros/mocap/pose', PoseStamped, queue_size=1)
 
 	while not rospy.is_shutdown():
+		print rBody.rbId
 		if rBody.tracking_valid :
 			#print "tracking valid..."
 			rBody.mavros_msg.header.stamp= rospy.Time.now()

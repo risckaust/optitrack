@@ -58,7 +58,6 @@ def main():
 	mavros_pub = rospy.Publisher('mavros/mocap/pose', PoseStamped, queue_size=1)
 
 	while not rospy.is_shutdown():
-		print rBody.rbId
 		if rBody.tracking_valid :
 			#print "tracking valid..."
 			rBody.mavros_msg.header.stamp= rospy.Time.now()
